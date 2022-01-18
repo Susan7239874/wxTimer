@@ -13,36 +13,54 @@
     var timer = require('../../plugins/wxTimer.js');  
 
 ##### 最简单的调用方式： 
-
+data中必须定义2个变量：
 ```
-var wxTimer = new timer({
-    beginTime:"00:00:10"
-})
-wxTimer.start(this);
-wxTimer.stop();
+data:{
+    timeExpireList: [],//倒计时列表
+    wxTimerList: {},
+  }
+```
+##### 开启单个定时器： 
+```
+  //插件wxTimer使用
+  timerSetting() {
+    var wxTimer1 = new timer({
+      beginTime: "00:00:10",
+      name: 'wxTimer1',
+      complete: function () {
+        console.log("完成了")
+      }
+    })
+    wxTimer1.start(this)
+  },
+  onLoad() {
+    this.timerSetting();
+  }
 ``` 
 ##### 开启多个计时器  
 ```
-//开启第一个定时器
-var wxTimer1 = new timer({
-    beginTime:"00:00:10",
-    name:'wxTimer1',
-    complete:function(){
-        console.log("完成了")
-    }
-})
-wxTimer1.start(this);
-
-//开启第二个定时器
-var wxTimer2 = new timer({
-    beginTime:"00:01:11",
-    name:'wxTimer2',
-    complete:function(){
-        console.log("完成了")
-    }
-})
-wxTimer2.start(this);
-
+  //插件wxTimer使用
+  timerSetting() {
+     var wxTimer1 = new timer({  //开启第一个定时器
+       beginTime: "00:00:10",
+       name: 'wxTimer1',
+       complete: function () {
+         console.log("完成了")
+       }
+     })
+     wxTimer1.start(this);
+     var wxTimer2 = new timer({//开启第二个定时器
+       beginTime: "00:01:11",
+       name: 'wxTimer2',
+       complete: function () {
+         console.log("完成了")
+       }
+     })
+     wxTimer2.start(this);
+  },
+  onLoad() {
+    this.timerSetting();
+  }
 ```
 
 ##### 倒计时结束后执行事件 
